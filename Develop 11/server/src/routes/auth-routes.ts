@@ -44,6 +44,22 @@ export const login = async (req: Request, res: Response) => {
       { expiresIn: '1h' } // Token expires in 1 hour
     );
 
+    const { password: _, ...userWithoutPassword } = user.toJSON();
+    
+    res.json({
+      message: 'Login successful',
+      token,
+      user: userWithoutPassword
+    });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({
+      message: 'Internal server error'
+    });
+  }
+};
+
+
 
 const router = Router();
 
