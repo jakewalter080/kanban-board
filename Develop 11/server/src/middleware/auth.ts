@@ -24,3 +24,12 @@ next: NextFunction
     if (!process.env.JWT_SECRET) {
       throw new Error('JWT_SECRET is not configured');
     }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET) as {
+      id: number;
+      username: string;
+    };
+
+    const user = await UserModel.findById(decoded.id);
+    if (!user) {
+      return res.status(401).json({ message: 'User not found' });
+    }
