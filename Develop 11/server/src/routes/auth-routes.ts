@@ -27,7 +27,14 @@ export const login = async (req: Request, res: Response) => {
       });
     }
 
-
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) {
+      console.error('JWT_SECRET is not configured');
+      return res.status(500).json({
+        message: 'Internal server error'
+      });
+    }
+    
 const router = Router();
 
 // POST /login - Login a user
