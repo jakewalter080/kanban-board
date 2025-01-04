@@ -34,10 +34,21 @@ export const login = async (req: Request, res: Response) => {
         message: 'Internal server error'
       });
     }
-    
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+        username: user.username
+      },
+      jwtSecret,
+      { expiresIn: '1h' } // Token expires in 1 hour
+    );
+
+
 const router = Router();
 
 // POST /login - Login a user
+
 router.post('/login', login);
 
 
