@@ -7,13 +7,13 @@ export const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
 
-    // Validate input
+
     if (!username || !password) {
       return res.status(400).json({
         message: 'Username and password are required'
       });
     }
-    // Find user in database
+
     const user = await User.findOne({ where: { username } });
     if (!user) {
       return res.status(401).json({
