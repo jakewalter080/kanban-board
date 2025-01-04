@@ -41,7 +41,7 @@ export const login = async (req: Request, res: Response) => {
         username: user.username
       },
       jwtSecret,
-      { expiresIn: '1h' } // Token expires in 1 hour
+      { expiresIn: '1h' } 
     );
 
     const { password: _, ...userWithoutPassword } = user.toJSON();
@@ -58,8 +58,6 @@ export const login = async (req: Request, res: Response) => {
     });
   }
 };
-
-
 
 const router = Router();
 
