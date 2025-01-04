@@ -20,6 +20,12 @@ export const login = async (req: Request, res: Response) => {
         message: 'Invalid credentials'
       });
     }
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      return res.status(401).json({
+        message: 'Invalid credentials'
+      });
+    }
 
 
 const router = Router();
