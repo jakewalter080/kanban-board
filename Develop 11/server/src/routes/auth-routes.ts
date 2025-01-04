@@ -13,8 +13,14 @@ export const login = async (req: Request, res: Response) => {
         message: 'Username and password are required'
       });
     }
+    // Find user in database
+    const user = await User.findOne({ where: { username } });
+    if (!user) {
+      return res.status(401).json({
+        message: 'Invalid credentials'
+      });
+    }
 
-    
 
 const router = Router();
 
