@@ -33,3 +33,10 @@ next: NextFunction
     if (!user) {
       return res.status(401).json({ message: 'User not found' });
     }
+
+    req.user = {
+      id: decoded.id,
+      username: decoded.username
+    };
+
+    
